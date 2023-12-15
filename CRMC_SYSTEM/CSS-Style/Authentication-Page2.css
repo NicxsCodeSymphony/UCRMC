@@ -1,0 +1,159 @@
+/* Authentication-Page.css */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(64, 61, 61);
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    height: 450px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* <<<<<<<<<< ANIMATION >>>>>>>>>> */
+.container::before {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 200%;
+    width: 220px;
+    background: linear-gradient(#00ccff, #d500f9);
+    animation: rotate 4s linear infinite;
+}
+
+.container::after{
+    content: '';
+    position: absolute;
+    background: #262626;
+    border-radius: 10px;
+    inset: 5px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+/* <<<<<<<<<< ANIMATION >>>>>>>>>> */
+
+/* <<<<<<<<<< HEADER >>>>>>>>>> */
+.header{
+    margin-top: 80px;
+    z-index: 2;
+}
+h1 {
+    font-size: 2em; 
+}
+
+p {
+    font-size: 1.2em; 
+}
+/* <<<<<<<<<< HEADER >>>>>>>>>> */
+
+/* <<<<<<<<<< FOOTER >>>>>>>>>> */
+.footer{
+    margin-top: 10px;
+    z-index: 2;
+}
+.sign-in{
+    color: #11b8fa;
+}
+/* <<<<<<<<<< FOOTER >>>>>>>>>> */
+
+/* <<<<<<<<<< BUTTONS >>>>>>>>>> */
+.btn-cta{
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+.draw-border, .draw-border1 {
+    box-shadow: inset 0 0 0 4px #58afd1;
+    color: #58afd1;
+    transition: color 0.25s 0.0833333333s;
+    position: relative;
+}
+
+.draw-border::before, .draw-border::after, .draw-border1::before, .draw-border1::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.draw-border::before, .draw-border1::before {
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.draw-border::after, .draw-border1::after {
+    border-top-width: 4px;
+    border-right-width: 4px;
+}
+
+.draw-border:hover, .draw-border1:hover {
+    color: #ffe593;
+}
+
+.draw-border:hover::before, .draw-border:hover::after, .draw-border1:hover::before, .draw-border1:hover::after {
+    border-color: #ffe593;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100%;
+    height: 100%;
+}
+
+.draw-border:hover::before, .draw-border1:hover::before {
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.draw-border:hover::after, .draw-border1:hover::after {
+    transition-delay: 0s, 0.25s, 0s;
+}
+
+.btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1.5;
+    font: 700 17px "Roboto Slab", sans-serif;
+    padding: 1em 2em;
+    letter-spacing: 0.05rem;
+}
+
+.btn:focus {
+    outline: 2px dotted #55d7dc;
+}
+/* <<<<<<<<<< BUTTONS >>>>>>>>>> */
+

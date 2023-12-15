@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of CRMC</title>
+    <link rel="stylesheet" href="CSS-Style/LogIn-Page.css">
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="card">
+            <div class="login">Log in</div>
+            <div class="inputBox">
+                <input type="text" required>
+                <span>Username</span>
+            </div>
+            <div class="inputBox">
+                <input type="password" id="password" required>
+                <span>Password</span>
+            </div>
+            <div class="show-password">
+                <input type="checkbox" id="showPassword"> Show Password
+            </div>
+            <div class="btn-cta">
+                <button class="btn draw-border">SIGN IN</button>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('showPassword').addEventListener('change', function () {
+            var passwordInput = document.getElementById('password');
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+    </script>
+
+</body>
+</html>
