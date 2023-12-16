@@ -1,44 +1,50 @@
+<?php
+  
+  session_start();
+  include "connection.php";
+
+  if(isset($_POST['cta'])){
+    $user = mysqli_real_escape_string($conn, $_POST['user']);
+    $pass = mysqli_real_escape_string($conn, $_POST['pass']);
+    
+    $query = "SELECT * FROM credentials WHERE username = '$user' AND password = '$pass'";
+    $result = mysqli_query($conn, $query);
+    $count = mysqli_num_rows($result);
+    
+    if($count == 1){
+      $_SESSION['user'] = $user;
+      header("Location: dashboard.php");
+    }
+  }
+  
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University of CRMC</title>
-    <link rel="stylesheet" href="css/login.css">
+    <title>Univerity of CRMC</title>
+    <link rel="stylesheet" href="css/loginAdmin.css">
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="card">
-            <div class="login">Log in</div>
-            <div class="inputBox">
-                <input type="text" required>
-                <span>Username</span>
-            </div>
-            <div class="inputBox">
-                <input type="password" id="password" required>
-                <span>Password</span>
-            </div>
-            <div class="show-password">
-                <input type="checkbox" id="showPassword"> Show Password
-            </div>
-            <div class="btn-cta">
-                <button class="btn draw-border">SIGN IN</button>
-            </div>
-            <div class="forgot-password">
-                <a href="#">Forgot Password?</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('showPassword').addEventListener('change', function () {
-            var passwordInput = document.getElementById('password');
-            passwordInput.type = this.checked ? 'text' : 'password';
-        });
-    </script>
-
+  
+  <div class="hero">
+    
+      <div class="container">
+        <h1>Admin</h1>
+        <form method="post">
+        <input type="text" name="user" placeholder="Username">
+        <input type="text" name="pass" placeholder="Password">
+        
+        <input type="submit" name="cta" value="Submit"> 
+        
+      </form>
+      </div>
+    
+  </div>
+  
 </body>
 </html>
