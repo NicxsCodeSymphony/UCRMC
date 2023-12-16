@@ -17,12 +17,16 @@
                 <input type="text" required>
                 <span>Username</span>
             </div>
+            <div class="inputBox2">
+                <input type="text" required>
+                <span>Email</span>
+            </div>
             <div class="inputBox">
                 <input type="password" id="password" required>
                 <span>Password</span>
             </div>
             <div class="inputBox1">
-                <input type="password" required>
+                <input type="password" id="password1" required>
                 <span>Confirm Password</span>
             </div>
             <div class="show-password">
@@ -37,6 +41,10 @@
             document.getElementById('showPassword').addEventListener('change', function () {
                 var passwordInput = document.getElementById('password');
                 passwordInput.type = this.checked ? 'text' : 'password';
+            });
+            document.getElementById('showPassword').addEventListener('change', function () {
+                var passwordInput1 = document.getElementById('password1');
+                passwordInput1.type = this.checked ? 'text' : 'password';
             });
         </script>
     </div>
