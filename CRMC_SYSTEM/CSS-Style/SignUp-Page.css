@@ -17,7 +17,7 @@ body {
     flex-direction: column;
     align-items: center;
     color: #fff;
-    height: 450px;
+    height: 550px;
     width: 90%;
     max-width: 450px;
     position: relative;
@@ -78,12 +78,12 @@ body {
     padding-top: 30px;
 }
 
-.inputBox, .inputBox1 {
+.inputBox, .inputBox1, .inputBox2 {
     position: relative;
     width: 150%;
 }
 
-.inputBox input, .inputBox1 input {
+.inputBox input, .inputBox1 input, .inputBox2 input {
     width: 100%;
     padding: 10px;
     outline: none;
@@ -95,7 +95,7 @@ body {
     transition: 0.1s;
 }
 
-.inputBox span, .inputBox1 span {
+.inputBox span, .inputBox1 span, .inputBox2 span {
     margin-top: 5px;
     position: absolute;
     left: 0;
@@ -134,10 +134,23 @@ body {
     border: 2px;
 }
 
+.inputBox2 input:valid~span,
+.inputBox2 input:focus~span {
+    transform: translateX(240px) translateY(-30px);
+    font-size: 0.8em;
+    padding: 10px 20px;
+    background: linear-gradient(#00ccff, #d500f9);
+    letter-spacing: 0.2em;
+    color: #fff;
+    border: 2px;
+}
+
 .inputBox input:valid,
 .inputBox input:focus,
 .inputBox1 input:valid,
-.inputBox1 input:focus {
+.inputBox1 input:focus,
+.inputBox2 input:valid,
+.inputBox2 input:focus {
     border: 2px solid #fff;
     border-radius: 8px;
 }
@@ -158,7 +171,7 @@ body {
 
 .show-password{
     position: absolute;
-    bottom: 28%;
+    bottom: 26%;
     left: 14%;
 }
 
@@ -167,7 +180,7 @@ body {
     display: flex;
     flex-direction: row; 
     gap: 20px;
-    margin-top: 30px;
+    margin-top: 40px;
     z-index: 2;
 }
 
