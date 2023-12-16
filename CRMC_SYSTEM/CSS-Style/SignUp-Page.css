@@ -117,7 +117,7 @@ body {
     transform: translateX(200px) translateY(-30px);
     font-size: 0.8em;
     padding: 10px 20px;
-    background: linear-gradient(#00ccff, #d500f9);
+    background: linear-gradient(#00ccff, #0259ca);
     letter-spacing: 0.2em;
     color: #fff;
     border: 2px;
@@ -128,7 +128,7 @@ body {
     transform: translateX(117px) translateY(-30px);
     font-size: 0.8em;
     padding: 10px 20px;
-    background: linear-gradient(#00ccff, #d500f9);
+    background: linear-gradient(#00ccff, #0259ca);
     letter-spacing: 0.2em;
     color: #fff;
     border: 2px;
@@ -139,7 +139,7 @@ body {
     transform: translateX(240px) translateY(-30px);
     font-size: 0.8em;
     padding: 10px 20px;
-    background: linear-gradient(#00ccff, #d500f9);
+    background: linear-gradient(#00ccff, #0259ca);
     letter-spacing: 0.2em;
     color: #fff;
     border: 2px;
