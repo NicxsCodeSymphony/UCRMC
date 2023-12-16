@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of CRMC</title>
+    <link rel="stylesheet" href="CSS-Style/Admin-Dashboard.css">
+</head>
+<body>
+    <div class="side-bar">
+        <img class="logo" src="images/crmc-logo.png" alt="">
+        <div class="header">
+            <p>Welcome Admin <br>--Admin Name here--</p>
+        </div>
+        <div class="buttons">
+            <div class="department">
+                <p>Department</p>
+            </div>
+            <div class="course">
+                <p>Course</p>
+            </div>
+            <div class="semester">
+                <p>Semester</p>
+            </div>
+            <div class="subjects">
+                <p>Subjects</p>
+            </div>
+            <div class="teachers">
+                <p>Teachers</p>
+            </div>
+            <div class="student-info">
+                <p>Student Info</p>
+            </div>
+            <div class="manage-faculty">
+                Manage faculty
+            </div>
+            <div class="log-out">
+                Log Out
+            </div>
+            <div class="theme">
+                Theme
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        <h1>Department Overview</h1>
+    </div>
+    <div class="search-bar">
+        <p>Search bar</p>
+   </div>
+   <div class="profile">
+        <img src="images/profile.png" height="70px" width="70px" alt="">
+   </div>
+    
+    <div class="container">
+        <table class="center-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><img src="images/crmc-logo.png" alt="" width="50"></td>
+                    <td>Company A</td>
+                    <td>
+                        <button class="update-btn" onclick="updateRecord(1)">Update</button>
+                        <button class="delete-btn" onclick="deleteRecord(1)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><img src="images/crmc-logo.png" alt="" width="50"></td>
+                    <td>Company B</td>
+                    <td>
+                        <button class="update-btn" onclick="updateRecord(2)">Update</button>
+                        <button class="delete-btn" onclick="deleteRecord(2)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function updateRecord(id) {
+            console.log("Update record with ID:", id);
+        }
+
+        function deleteRecord(id) {
+            console.log("Delete record with ID:", id);
+        }
+    </script>
+</body>
+</html>
