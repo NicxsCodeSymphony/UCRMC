@@ -3,96 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University of CRMC</title>
+    <title>UCRMC | Admin</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="CSS-Style/Admin-Dashboard.css">
 </head>
 <body>
-    <div class="side-bar">
-        <img class="logo" src="images/crmc-logo.png" alt="">
-        <div class="header">
-            <p>Welcome Admin <br>--Admin Name here--</p>
-        </div>
-        <div class="buttons">
-            <div class="department">
-                <p>Department</p>
-            </div>
-            <div class="course">
-                <p>Course</p>
-            </div>
-            <div class="semester">
-                <p>Semester</p>
-            </div>
-            <div class="subjects">
-                <p>Subjects</p>
-            </div>
-            <div class="teachers">
-                <p>Teachers</p>
-            </div>
-            <div class="student-info">
-                <p>Student Info</p>
-            </div>
-            <div class="manage-faculty">
-                Manage faculty
-            </div>
-            <div class="log-out">
-                Log Out
-            </div>
-            <div class="theme">
-                Theme
-            </div>
-        </div>
-    </div>
-    <div class="title">
-        <h1>Department Overview</h1>
-    </div>
-    <div class="search-bar">
-        <p>Search bar</p>
-   </div>
-   <div class="profile">
-        <img src="images/profile.png" height="70px" width="70px" alt="">
-   </div>
     
-    <div class="container">
-        <table class="center-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Logo</th>
-                    <th>Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><img src="images/crmc-logo.png" alt="" width="50"></td>
-                    <td>Company A</td>
-                    <td>
-                        <button class="update-btn" onclick="updateRecord(1)">Update</button>
-                        <button class="delete-btn" onclick="deleteRecord(1)">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><img src="images/crmc-logo.png" alt="" width="50"></td>
-                    <td>Company B</td>
-                    <td>
-                        <button class="update-btn" onclick="updateRecord(2)">Update</button>
-                        <button class="delete-btn" onclick="deleteRecord(2)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="sidebar">
+        <div class="top">
+            <i class="bx bx-chevron-right toggle" id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="images/crmc-logo.png" alt="me" class="user-img">
+            <div>
+                <p class="bold">University of CRMC</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span class="nav-item">Department</span>
+                </a>
+                <span class="tooltip">Department</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-bar-chart-alt-2'></i>
+                    <span class="nav-item">Course</span>
+                </a>
+                <span class="tooltip">Course</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-calendar'></i>
+                    <span class="nav-item">Semester</span>
+                </a>
+                <span class="tooltip">Semester</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="nav-item">Subjects</span>
+                </a>
+                <span class="tooltip">Subjects</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span class="nav-item">Teachers</span>
+                </a>
+                <span class="tooltip">Teachers</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span class="nav-item">Student Info</span>
+                </a>
+                <span class="tooltip">Student Info</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span class="nav-item">Manage Faculty</span>
+                </a>
+                <span class="tooltip">Manage Faculty</span>
+            </li>
+            <div class="bottom">
+                <ul>
+                <li>
+                    <a href="#">
+                        <i class='bx bx-log-out'></i>
+                        <span class="nav-item">Log Out</span>
+                    </a>
+                    <span class="tooltip">Log Out</span>
+                </li>
+                <li class="theme">
+                    <a href="#">
+                        <i class='bx bx-moon icon moon'></i>
+                        <span class="nav-item">Dark Mode</span>
+                    </a>
+                    <span class="tooltip">Dark Mode</span>
+                </li>
+            </ul>
+            </div>
+        </ul>
     </div>
 
-    <script>
-        function updateRecord(id) {
-            console.log("Update record with ID:", id);
-        }
-
-        function deleteRecord(id) {
-            console.log("Delete record with ID:", id);
-        }
-    </script>
+    <div class="main-content">
+        <div class="container"> 
+            <h1>Dashboard Overview</h1>
+            <div class="nav-list">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </div>
+                <div class="notification">
+                    <a href="#">
+                        <i class='bx bx-bell'></i>
+                    </a>
+                </div>
+                <img src="images/LawX.jpg" alt="user" class="user-profile">
+            </div>
+            
+        </div>        
+        <div class="table-container">
+            <table class="center-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>LOGO</th>
+                        <th>NAME</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><img src="images/crmc-logo.png" alt="" width="50"></td>
+                        <td>Company A</td>
+                        <td>
+                            <button class="update-btn" onclick="updateRecord(1)">Update</button>
+                            <button class="delete-btn" onclick="deleteRecord(1)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><img src="images/profile.png" alt="" width="50"></td>
+                        <td>Company B</td>
+                        <td>
+                            <button class="update-btn" onclick="updateRecord(2)">Update</button>
+                            <button class="delete-btn" onclick="deleteRecord(2)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><img src="images/crmc-logo.png" alt="" width="50"></td>
+                        <td>Company C</td>
+                        <td>
+                            <button class="update-btn" onclick="updateRecord(2)">Update</button>
+                            <button class="delete-btn" onclick="deleteRecord(2)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><img src="images/profile.png" alt="" width="50"></td>
+                        <td>Company D</td>
+                        <td>
+                            <button class="update-btn" onclick="updateRecord(2)">Update</button>
+                            <button class="delete-btn" onclick="deleteRecord(2)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><img src="images/crmc-logo.png" alt="" width="50"></td>
+                        <td>Company E</td>
+                        <td>
+                            <button class="update-btn" onclick="updateRecord(2)">Update</button>
+                            <button class="delete-btn" onclick="deleteRecord(2)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
+
+<script>
+    let btn = document.querySelector('#btn')
+    let sidebar = document.querySelector('.sidebar')
+
+    btn.onclick = function () {
+        sidebar.classList.toggle('active');
+    };
+</script>
+
 </html>
