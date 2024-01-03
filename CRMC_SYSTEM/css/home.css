@@ -1,0 +1,152 @@
+:root{
+    --header-font: 'Inter';
+    --secondary-font: 'Marko One';
+    --secondary-color: #268270;
+    --third-color: #f3a93a;
+    --margins: 50px;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: var(--header-font), sans-serif;
+}
+
+.header{
+    background: #efeae2;
+    height: 13vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+}
+
+.logo{
+    padding-left: 45px;
+}
+
+.logo img{
+    width: 80px;
+}
+
+.header > div{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar{
+    margin-left: 4vh;
+    width: 72%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.right-head{
+    display: flex;
+    justify-content: center;
+    padding-left: 60px;
+}
+
+.right-head a{
+    background: var(--secondary-color);
+    padding: 18px 35px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+}
+
+/* ****************************************** START OF HERO *********************************  */
+
+.hero{
+    width: 92.5%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    margin:0 var(--margins);
+}
+
+.hero > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+
+.left-hero h5{
+    font-weight: 100;
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+.left-hero h1{
+    font-family: var(--secondary-font);
+    font-size: 75px;
+    line-height: 1.2em;
+    font-weight: 400;
+    margin: 25px 0;
+}
+
+.left-hero p{
+    max-width: 500px;
+    color: #696969;
+    line-height: 1.2em;
+}
+
+.button-container{
+    margin-top: 60px;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-container a{
+    background: var(--secondary-color);
+    padding: 18px 35px;
+    border-radius: 25px;
+    color: #fff;
+}
+
+.button-container a:first-child{
+    background-color: var(--third-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+li{
+    list-style: none;
+    font-weight: 500;
+    display: inline-block;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
+}
