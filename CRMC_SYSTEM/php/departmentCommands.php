@@ -1,6 +1,5 @@
 <?php
 
-
 // Fetch departments from the database
 $conn = new Connection();
 $pdo = $conn->openConnection();

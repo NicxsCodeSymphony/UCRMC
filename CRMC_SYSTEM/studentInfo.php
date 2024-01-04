@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
-include 'php/departmentCommands.php';
+include 'php/studentCommands.php';
 ?>
 
 
@@ -16,7 +16,18 @@ include 'php/departmentCommands.php';
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/teacher.css">
+
+
+    <style>
+        select{
+            width: 150px;
+            font-size: 16px;
+            border: none;
+            background: transparent;
+            font-family: 'Rubik';
+        }
+    </style>
 </head>
 <body>
 
@@ -34,7 +45,7 @@ include 'php/departmentCommands.php';
                 <li><a href="semester.php"><i class="fas fa-calendar-alt"></i> Semester</a></li>
                 <li><a href="subject.php"><i class="fas fa-flask"></i> Subjects</a></li>
                 <li><a href="teacherInfo.php"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
-                <li><a href="studentInfo.php"><i class="fas fa-user-graduate"></i> Student Info</a></li>
+                <li><a href=""><i class="fas fa-user-graduate"></i> Student Info</a></li>
                 <li><a href="manage.php"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
             </ul>
 
@@ -89,8 +100,8 @@ include 'php/departmentCommands.php';
 
            <div class="table-heading">
            <div class="left-head">
-    <h1 style="font-size: 2.2rem;">Department</h1>
-    <p id="courses"><?= count($departments); ?> total, <span style="opacity: 0.5;">departments</span></p>
+    <h1 style="font-size: 2.2rem;">Student</h1>
+    <p id="courses"><?= count($departments); ?> total, <span style="opacity: 0.5;">students</span></p>
 </div>
 
 
@@ -113,37 +124,55 @@ include 'php/departmentCommands.php';
            <table>
     <thead>
         <tr>
-            <th>Department</th>
-            <th>Logo</th>
-            <th>Action</th>
+            <th>Full Name</th>
+            <th>Photo</th>
+            <th>Birthdate</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <td>Department</td>
+            <td>Course</td>
+            <td>Action</td>
         </tr>
     </thead>
     <tbody>
+
+    <form action="studentInfo.php" method="post" name="updateTeacherForm">
+
         <?php if (!empty($departments)): ?>
-            <?php foreach ($departments as $department): ?>
+            <?php foreach ($departments as $studentInfo): ?>
                 <tr>
-                    <td><?= $department['departmentName']; ?></td>
+                <input type="hidden" name="studentID" value="<?= $studentInfo['studentID']?>">
+                    <td><?= $studentInfo['firstName'], $studentInfo['lastName']; ?></td>
                     <td>
                         <!-- Display the logo if available -->
-                        <?php if (!empty($department['departmentLogo'])): ?>
-                            <img src="<?= $department['departmentLogo']; ?>" alt="Department Logo" style="width: 50px; height: 50px;">
+                        <?php if (!empty($studentInfo['photo'])): ?>
+                            <img src="<?= $studentInfo['photo']; ?>" alt="Department Logo" style="width: 50px; height: 50px;">
                         <?php endif; ?>
                     </td>
-                    <!-- Add other columns as needed -->
-
-                    <!-- Add action buttons for update and delete -->
+                    <td><?= date('F j, Y', strtotime($studentInfo['birthdate'])); ?></td>
+                    <td><?= $studentInfo['age']?></td>
+                    <td><?= $studentInfo['email']?></td>
+                    <td><?= $studentInfo['password']?></td>
+                    <td><?= $studentInfo['contact']?></td>
+                    <td><?= str_replace('Bogo City, Cebu', '', $studentInfo['address']); ?></td>
+                    <td><?= ($studentInfo['departmentName'] == '') ? 'CCS' : $studentInfo['departmentName']; ?></td>
+                    <td><?= getCourseNameById($studentInfo['courseID'], $courseses) ?></td>
                     <td>
-                    <a href="update_department.php?departmentID=<?= $department['departmentID']; ?>">Update</a>
-                        <button onclick="deleteDepartment(<?= $department['departmentID']; ?>)">Delete</button>
+                    <a href="updateStudent.php?studentID=<?= $studentInfo['studentID']; ?>">Update</a>
+                    <button onclick="deleteDepartment(<?= $department['studentID']; ?>)">Delete</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="2">No departments found.</td>
+                <td colspan="3">No student found.</td>
                 <!-- Add other columns as needed -->
             </tr>
         <?php endif; ?>
+        </form>
     </tbody>
 </table>
 </div>
@@ -156,12 +185,12 @@ include 'php/departmentCommands.php';
     </div>
 
     <!-- *********************************** POP UPS *********************************** -->
-
-    
     <div class="popup-container" id="popupContainer">
         <div class="popup">
             <span class="close-btn" onclick="closePopup()">&times;</span>
             <h1>ADD DEPARTMENT</h1>
+
+            
 
             <!-- Add this attribute to enable file uploads -->
 <form method="POST" action="department.php" enctype="multipart/form-data">
@@ -186,5 +215,42 @@ include 'php/departmentCommands.php';
 
     <div class="custom-alert" id="customAlert">Department added successfully!</div>
    <script src="js/department.js"></script>
+
+   <script>
+     function updateSubjectID(select) {
+        var selectedSubjectID = select.value;
+        document.getElementById('selectedSubjectID').value = selectedSubjectID;
+        document.updateTeacherForm.submit();
+    }
+
+    function updateCourseID(select) {
+    var selectedCourseID = select.value;
+    document.getElementById('selectedCourseID').value = selectedCourseID;
+    document.updateTeacherForm.submit();
+}
+
+
+function deleteDepartment(departmentID) {
+        if (confirm("Are you sure you want to delete this department?")) {
+            // Send an AJAX request to delete_department.php
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "teacherInfo.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Reload the page after successful deletion
+                    location.reload();
+                }
+            };
+            
+
+            // Send the department ID to the server
+            xhr.send("departmentID=" + departmentID);
+        }
+    }
+   </script>
 </body>
 </html>
+
+

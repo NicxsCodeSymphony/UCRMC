@@ -248,15 +248,15 @@ include 'php/courseCommands.php';
                 <h3>UCRMC</h3>
             </div>
 
-            <!-- Navbar List with Icons -->
+            <!-- Navbar List with Icons --> 
             <ul class="navbar">
                 <li><a href="department.php"><i class="fas fa-building"></i> Department</a></li>
-                <li><a href="#"><i class="fas fa-book"></i> Course</a></li>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i> Semester</a></li>
+                <li><a href=""><i class="fas fa-book"></i> Course</a></li>
+                <li><a href="semester.php"><i class="fas fa-calendar-alt"></i> Semester</a></li>
                 <li><a href="subject.php"><i class="fas fa-flask"></i> Subjects</a></li>
-                <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
-                <li><a href="#"><i class="fas fa-user-graduate"></i> Student Info</a></li>
-                <li><a href="#"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
+                <li><a href="teacherInfo.php"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+                <li><a href="studentInfo.php"><i class="fas fa-user-graduate"></i> Student Info</a></li>
+                <li><a href="manage.php"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
             </ul>
 
             <!-- Account Section -->
@@ -310,6 +310,7 @@ include 'php/courseCommands.php';
 <div class="table-heading">
            <div class="left-head">
     <h1 style="font-size: 2.2rem;">Course</h1>
+    <p id="courses"><?= count($course); ?> total, <span style="opacity: 0.5;">courses</span></p>
 
 </div>
 
@@ -482,7 +483,7 @@ function closePopup() {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', () => deleteCourses(departmentID, course));
+        deleteButton.addEventListener('click', () => deleteCourses(course));
 
         // Append action buttons to the cellActions
         cellActions.appendChild(editButton);
@@ -511,28 +512,25 @@ function editCourses(departmentID, departmentName, courseName) {
     window.location.href = `update_course.php?courseName=${courseName}`;
 }
 
-
-
-
-
 function deleteCourses(courseID) {
     if (confirm("Are you sure you want to delete this course?")) {
-            // Send an AJAX request to delete_course.php
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "course.php", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // Send an AJAX request to delete_course.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "course.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // Reload the page after successful deletion
-                    location.reload();
-                }
-            };
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Reload the page after successful deletion
+                location.reload();
+            }
+        };
 
-            // Send the course ID to the server
-            xhr.send("courseID=" + courseID);
-        }
+        // Send the course ID to the server
+        xhr.send("deleteCourse=1&courseID=" + courseID);
+    }
 }
+
 
 </script>
 

@@ -19,14 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['departmentID'])) {
     $updateDepartmentName = $_POST['updateDepartmentName'];
 
     // Check if a new logo is being uploaded
-    if (isset($_FILES['updateLogoInput']) && $_FILES['updateLogoInput']['error'] == 0) {
-        // Handle image upload for update
-        $updateImageURL = '';
+    if (isset($_FILES['updateLogoInput']) && $_FILES['updateLogoInput']['size'] > 0) {
+        // New logo is uploaded
+        $updateImageName = $_FILES['updateLogoInput']['name'];
+        $updateImageTmpName = $_FILES['updateLogoInput']['tmp_name'];
+        $updateImageURL = 'uploads/' . $updateImageName;
 
-        // Similar logic as in the existing code for image upload
-        // ...
+        // Move the uploaded file to the desired directory
+        move_uploaded_file($updateImageTmpName, $updateImageURL);
 
-        // Update data with the new logo in the database
         $conn = new Connection();
         $pdo = $conn->openConnection();
 
@@ -54,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['departmentID'])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,11 +138,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['departmentID'])) {
 
         <!-- Add the file input for the image -->
         <div class="add-logo-container">
-            <input type="file" name="updateLogoInput" id="updateLogoInput" accept="image/*" onchange="handleUpdateLogoInputChange()">
-            <label for="updateLogoInput" class="add-logo-button">
-                <img src="<?= $department['departmentLogo']; ?>" alt="Department Logo" class="add-logo-preview" id="updateLogoPreview">
-            </label>
-        </div>
+        <input type="file" name="updateLogoInput" id="updateLogoInput" onchange="handleUpdateLogoInputChange()" accept="image/*">
+        <label for="updateLogoInput" class="add-logo-button">
+            <img src="<?= $department['departmentLogo']; ?>" alt="Department Logo" class="add-logo-preview" id="updateLogoPreview">
+        </label>
+    </div>
 
         <label for="updateDepartmentName">Updated Department Name:</label>
         <input type="text" name="updateDepartmentName" value="<?= $department['departmentName']; ?>" required>

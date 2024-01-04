@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
-include 'php/departmentCommands.php';
+include 'php/semesterCommands.php';
 ?>
 
 
@@ -29,13 +29,13 @@ include 'php/departmentCommands.php';
 
             <!-- Navbar List with Icons -->
             <ul class="navbar">
-                <li><a href="department.php"><i class="fas fa-building"></i> Department</a></li>
+                <li><a href="semester.php"><i class="fas fa-building"></i> semester</a></li>
                 <li><a href="course.php"><i class="fas fa-book"></i> Course</a></li>
-                <li><a href="semester.php"><i class="fas fa-calendar-alt"></i> Semester</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Semester</a></li>
                 <li><a href="subject.php"><i class="fas fa-flask"></i> Subjects</a></li>
                 <li><a href="teacherInfo.php"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
                 <li><a href="studentInfo.php"><i class="fas fa-user-graduate"></i> Student Info</a></li>
-                <li><a href="manage.php"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
+                <li><a href="#"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
             </ul>
 
             <!-- Account Section -->
@@ -89,8 +89,8 @@ include 'php/departmentCommands.php';
 
            <div class="table-heading">
            <div class="left-head">
-    <h1 style="font-size: 2.2rem;">Department</h1>
-    <p id="courses"><?= count($departments); ?> total, <span style="opacity: 0.5;">departments</span></p>
+    <h1 style="font-size: 2.2rem;">Semester</h1>
+    <p id="courses"><?= count($semesters); ?> total, <span style="opacity: 0.5;">semesters</span></p>
 </div>
 
 
@@ -113,34 +113,29 @@ include 'php/departmentCommands.php';
            <table>
     <thead>
         <tr>
-            <th>Department</th>
-            <th>Logo</th>
+            <th>Semester</th>
+            <th>Year Level</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($departments)): ?>
-            <?php foreach ($departments as $department): ?>
+        <?php if (!empty($semesters)): ?>
+            <?php foreach ($semesters as $semester): ?>
                 <tr>
-                    <td><?= $department['departmentName']; ?></td>
-                    <td>
-                        <!-- Display the logo if available -->
-                        <?php if (!empty($department['departmentLogo'])): ?>
-                            <img src="<?= $department['departmentLogo']; ?>" alt="Department Logo" style="width: 50px; height: 50px;">
-                        <?php endif; ?>
-                    </td>
+                    <td><?= $semester['semester'] ?></td>
+                    <td><?= $semester['yearLevel'] ?></td>
                     <!-- Add other columns as needed -->
 
                     <!-- Add action buttons for update and delete -->
                     <td>
-                    <a href="update_department.php?departmentID=<?= $department['departmentID']; ?>">Update</a>
-                        <button onclick="deleteDepartment(<?= $department['departmentID']; ?>)">Delete</button>
+                    <a href="update_semester.php?semesterID=<?= $semester['semesterID']; ?>">Update</a>
+                        <button onclick="deletesemester(<?= $semester['semesterID']; ?>)">Delete</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="2">No departments found.</td>
+                <td colspan="2">No semesters found.</td>
                 <!-- Add other columns as needed -->
             </tr>
         <?php endif; ?>
@@ -161,10 +156,10 @@ include 'php/departmentCommands.php';
     <div class="popup-container" id="popupContainer">
         <div class="popup">
             <span class="close-btn" onclick="closePopup()">&times;</span>
-            <h1>ADD DEPARTMENT</h1>
+            <h1>ADD semester</h1>
 
             <!-- Add this attribute to enable file uploads -->
-<form method="POST" action="department.php" enctype="multipart/form-data">
+<form method="POST" action="semester.php" enctype="multipart/form-data">
     <!-- Your existing form elements -->
 
     <!-- Add the file input for the image -->
@@ -176,7 +171,7 @@ include 'php/departmentCommands.php';
         </label>
     </div>
 
-    <input type="text" name="departmentName" id="departmentName" placeholder="Enter Department Name">
+    <input type="text" name="semesterName" id="semesterName" placeholder="Enter semester Name">
     <button type="submit">Submit</button>
 </form>
 
@@ -184,7 +179,7 @@ include 'php/departmentCommands.php';
     </div>
 
 
-    <div class="custom-alert" id="customAlert">Department added successfully!</div>
-   <script src="js/department.js"></script>
+    <div class="custom-alert" id="customAlert">semester added successfully!</div>
+   <script src="js/semester.js"></script>
 </body>
 </html>

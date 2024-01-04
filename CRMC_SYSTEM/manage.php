@@ -1,10 +1,71 @@
 <?php
-session_start();
+
 include 'connection.php';
-include 'php/departmentCommands.php';
+
+// Fetch departments from the database
+$conn = new Connection();
+$pdo = $conn->openConnection();
+
+
+$stmt = $pdo->query("SELECT * FROM teacher");
+$departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$stmtSubjects = $pdo->query("SELECT * FROM subject");
+$subjects = $stmtSubjects->fetchAll(PDO::FETCH_ASSOC);
+
+$stmtCourse = $pdo->query("SELECT * FROM course");
+$courseses = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+$conn->closeConnection();
+
+if (isset($_POST['updateTeacherForm'])) {
+    $departmentID = $_POST['teacherID'];
+    $conn = new Connection();
+    $pdo = $conn->openConnection();
+    $stmt = $pdo->prepare("DELETE FROM teacher WHERE teacherID = ?");
+    $stmt->execute([$departmentID]);
+    $conn->closeConnection();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $teacherID = $_POST['teacherID'];
+    $selectedSubjectID = $_POST['selectedSubjectID'];
+    $selectedCourseID = $_POST['selectedCourseID'];
+    $pdo->query("UPDATE teacher SET subjectID = $selectedSubjectID WHERE teacherID = $teacherID");
+    $pdo->query("UPDATE teacher SET courseID = $selectedCourseID WHERE teacherID = $teacherID");
+
+    header("Location: manage.php");
+    exit();
+}
+
+$stmt = $pdo->query("SELECT teacher.*, department.departmentName 
+                    FROM teacher 
+                    JOIN department ON teacher.departmentID = department.departmentID");
+$departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$conn->closeConnection();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if the request is made using POST method
+
+    // Get the department ID from the POST data
+    $teacherID = $_POST['teacherID'];
+
+    // Delete the department from the database
+    $conn = new Connection();
+    $pdo = $conn->openConnection();
+
+    $stmt = $pdo->prepare("DELETE FROM teacher WHERE teacherID = ?");
+    $stmt->execute([$teacherID]);
+
+    $conn->closeConnection();
+}
+
+
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -16,7 +77,18 @@ include 'php/departmentCommands.php';
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/teacher.css">
+
+
+    <style>
+        select{
+            width: 250px;
+            font-size: 16px;
+            border: none;
+            background: transparent;
+            font-family: 'Rubik';
+        }
+    </style>
 </head>
 <body>
 
@@ -31,11 +103,11 @@ include 'php/departmentCommands.php';
             <ul class="navbar">
                 <li><a href="department.php"><i class="fas fa-building"></i> Department</a></li>
                 <li><a href="course.php"><i class="fas fa-book"></i> Course</a></li>
-                <li><a href="semester.php"><i class="fas fa-calendar-alt"></i> Semester</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Semester</a></li>
                 <li><a href="subject.php"><i class="fas fa-flask"></i> Subjects</a></li>
                 <li><a href="teacherInfo.php"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
                 <li><a href="studentInfo.php"><i class="fas fa-user-graduate"></i> Student Info</a></li>
-                <li><a href="manage.php"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
+                <li><a href="#"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
             </ul>
 
             <!-- Account Section -->
@@ -89,8 +161,8 @@ include 'php/departmentCommands.php';
 
            <div class="table-heading">
            <div class="left-head">
-    <h1 style="font-size: 2.2rem;">Department</h1>
-    <p id="courses"><?= count($departments); ?> total, <span style="opacity: 0.5;">departments</span></p>
+    <h1 style="font-size: 2.2rem;">Manage Faculty</h1>
+    <p id="courses"><?= count($departments); ?> total, <span style="opacity: 0.5;">teachers</span></p>
 </div>
 
 
@@ -113,37 +185,62 @@ include 'php/departmentCommands.php';
            <table>
     <thead>
         <tr>
-            <th>Department</th>
-            <th>Logo</th>
-            <th>Action</th>
+            <th>Full Name</th>
+            <td>Department</td>
+            <td>Course</td>
+            <td>Subject</td>
+            <td>Action</td>
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($departments)): ?>
-            <?php foreach ($departments as $department): ?>
-                <tr>
-                    <td><?= $department['departmentName']; ?></td>
-                    <td>
-                        <!-- Display the logo if available -->
-                        <?php if (!empty($department['departmentLogo'])): ?>
-                            <img src="<?= $department['departmentLogo']; ?>" alt="Department Logo" style="width: 50px; height: 50px;">
-                        <?php endif; ?>
-                    </td>
-                    <!-- Add other columns as needed -->
 
-                    <!-- Add action buttons for update and delete -->
+    <form action="teacherInfo.php" method="post" name="updateTeacherForm">
+
+        <?php if (!empty($departments)): ?>
+            <?php foreach ($departments as $teacherInfo): ?>
+                <tr>
+                <input type="hidden" name="teacherID" value="<?= $teacherInfo['teacherID']?>">
+                    <td><?= $teacherInfo['firstName'], $teacherInfo['lastName']; ?></td>
+                    <td><?= ($teacherInfo['departmentName'] == 'College of Computer Studies') ? 'CCS' : $teacherInfo['departmentName']; ?></td>
                     <td>
-                    <a href="update_department.php?departmentID=<?= $department['departmentID']; ?>">Update</a>
-                        <button onclick="deleteDepartment(<?= $department['departmentID']; ?>)">Delete</button>
+    <select name="selectedCourseID" onchange="updateCourseID(this)">
+        <?php foreach ($courseses as $subject): ?>
+            <?php if ($teacherInfo['courseID'] == $subject['courseID']): ?>
+                <option value="<?= $subject['courseID']; ?>" selected><?= $subject['courseName']; ?></option>
+            <?php else: ?>
+                <option value="<?= $subject['courseID']; ?>"><?= $subject['courseName']; ?></option>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </select>
+
+    <input type="hidden" name="selectedCourseID" id="selectedCourseID" value="<?= $subject['courseID']; ?>">
+</td>
+<td>
+    <select name="selectedSubjectID" onchange="updateSubjectID(this)">
+        <?php foreach ($subjects as $subject): ?>
+            <?php if ($teacherInfo['subjectID'] == $subject['subjectID']): ?>
+                <option value="<?= $subject['subjectID']; ?>" selected><?= $subject['subjectName']; ?></option>
+            <?php else: ?>
+                <option value="<?= $subject['subjectID']; ?>"><?= $subject['subjectName']; ?></option>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </select>
+    <input type="hidden" name="selectedSubjectID" id="selectedSubjectID" value="<?= $teacherInfo['subjectID']; ?>">
+</td>
+
+                    <td>
+                    <a href="update_department.php?departmentID=<?= $teacherInfo['departmentID']; ?>">Update</a>
+                        <button name="deleteTeacherForm" onclick="deleteDepartment(<?= $teacherInfo['departmentID']; ?>)">Delete</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="2">No departments found.</td>
+                <td colspan="3">No teacher found.</td>
                 <!-- Add other columns as needed -->
             </tr>
         <?php endif; ?>
+        </form>
     </tbody>
 </table>
 </div>
@@ -156,8 +253,6 @@ include 'php/departmentCommands.php';
     </div>
 
     <!-- *********************************** POP UPS *********************************** -->
-
-    
     <div class="popup-container" id="popupContainer">
         <div class="popup">
             <span class="close-btn" onclick="closePopup()">&times;</span>
@@ -186,5 +281,21 @@ include 'php/departmentCommands.php';
 
     <div class="custom-alert" id="customAlert">Department added successfully!</div>
    <script src="js/department.js"></script>
+
+   <script>
+     function updateSubjectID(select) {
+        var selectedSubjectID = select.value;
+        document.getElementById('selectedSubjectID').value = selectedSubjectID;
+        document.updateTeacherForm.submit();
+    }
+
+    function updateCourseID(select) {
+    var selectedCourseID = select.value;
+    document.getElementById('selectedCourseID').value = selectedCourseID;
+    document.updateTeacherForm.submit();
+}
+   </script>
 </body>
 </html>
+
+

@@ -80,6 +80,9 @@ $departmentsWithCourses = getDepartmentsAndCoursesFromDatabase($newconnection);
 $stmt = $pdo->query("SELECT departmentID, departmentName FROM department");
 $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$stmt = $pdo->query("SELECT * FROM subject");
+$subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 
@@ -319,9 +322,12 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .course-grid-items {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .course-grid-items:hover {
@@ -329,6 +335,11 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
 
+        .add-button-container {
+    position: absolute;
+    bottom: 100px; /* Adjust the top distance as needed */
+    right: 20vh; /* Adjust the right distance as needed */
+}
 
         
     </style>
@@ -350,12 +361,12 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <!-- Navbar List with Icons -->
             <ul class="navbar">
                 <li><a href="department.php"><i class="fas fa-building"></i> Department</a></li>
-                <li><a href="#"><i class="fas fa-book"></i> Course</a></li>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i> Semester</a></li>
+                <li><a href="course.php"><i class="fas fa-book"></i> Course</a></li>
+                <li><a href="semester.php"><i class="fas fa-calendar-alt"></i> Semester</a></li>
                 <li><a href="subject.php"><i class="fas fa-flask"></i> Subjects</a></li>
-                <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
-                <li><a href="#"><i class="fas fa-user-graduate"></i> Student Info</a></li>
-                <li><a href="#"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
+                <li><a href="teacherInfo.php"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+                <li><a href="studentInfo.php"><i class="fas fa-user-graduate"></i> Student Info</a></li>
+                <li><a href="manage.php"><i class="fas fa-users-cog"></i> Manage Faculty</a></li>
             </ul>
 
             <!-- Account Section -->
@@ -409,6 +420,7 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="table-heading">
            <div class="left-head">
     <h1 style="font-size: 2.2rem;">Subjects</h1>
+    <p id="courses"><?= count($subject); ?> total, <span style="opacity: 0.5;">subjects</span></p>
 
 </div>
 
@@ -431,8 +443,9 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
            <div class="table-wrapper">
                 <?php foreach ($departmentsWithCourses as $departmentID => $departmentData): ?>
                 <div class="department-container" style="position: relative;"
-                    data-department-id="<?= $departmentData[0]['departmentID']; ?>"
-                    data-department-name="<?= $departmentData[0]['departmentName']; ?>">
+                data-department-id="<?= $departmentData[0]['departmentID']; ?>"
+                data-department-name="<?= $departmentData[0]['departmentName']; ?>"
+                data-course-id="<?= $departmentData[0]['courseID']; ?>">
                     <div class="department-logo"
                         style="position: absolute; top: 10px; left: 15px; width: 50px; height: 50px; background: url('<?= $departmentData[0]['departmentLogo']; ?>') center/cover;">
                     </div>
@@ -457,17 +470,6 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <span class="close-btn" onclick="closePopup()">&times;</span>
         <h1>Add Course</h1>
 
-        <button class="button popup-add-subject-button" type="button" onclick="openPopup()">
-            <span class="button__text">Add Course</span>
-            <span class="button__icon">
-                <svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <line x1="12" x2="12" y1="5" y2="19"></line>
-                    <line x1="5" x2="19" y1="12" y2="12"></line>
-                </svg>
-            </span>
-        </button>
 
         <form method="POST" action="course.php" enctype="multipart/form-data" class="popup-form">
             <!-- Dropdown menu for selecting the department -->
@@ -478,7 +480,7 @@ $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <option value="<?= $dept['departmentID']; ?>"><?= $dept['departmentName']; ?></option>
                     <?php endforeach; ?>
                 </select>
-            </div>
+            </div>  
 
             <!-- Input for course name -->
             <div class="form-group">
@@ -564,7 +566,7 @@ document.addEventListener('DOMContentLoaded', function () {
         popupContainer.style.display = 'flex';
     }
 
-    function openEditPopup(departmentID, departmentName, courses) {
+    function openEditPopup(departmentID, departmentName, courses, courseID) {
     editCourseTitle.textContent = `Courses for ${departmentName}`;
     editCourseList.innerHTML = ""; // Clear existing courses
     
@@ -574,24 +576,25 @@ document.addEventListener('DOMContentLoaded', function () {
     courseGrid.classList.add('course-grids');
 
     // Add each course as a grid item
-    courses.forEach(course => {
+// Add each course as a grid item
+courses.forEach(course => {
         const courseItem = document.createElement('div');
         courseItem.classList.add('course-grid-items');
         courseItem.textContent = course;
+        
+        // Add a click event listener to each course item
+        courseItem.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = `addSubject.php?courseID=${courseID}&course=${encodeURIComponent(course)}`;
+            link.click();
+        });
+
         courseGrid.appendChild(courseItem);
     });
 
+
     // Append the course grid to the editCourseList
     editCourseList.appendChild(courseGrid);
-
-    // Add Course button in the editPopupContainer
-    const addCourseButton = document.createElement('button');
-    addCourseButton.classList.add('button', 'popup-add-course-button');
-    addCourseButton.type = 'button';
-    addCourseButton.textContent = 'Add Course';
-    addCourseButton.addEventListener('click', openPopup);
-    editPopupContainer.appendChild(addCourseButton);
-
     // Display the edit popup
     editPopupContainer.style.display = 'flex';
 }
@@ -601,13 +604,14 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', openPopup);
 
     departmentContainers.forEach(container => {
-        container.addEventListener('click', () => {
-            const departmentID = container.getAttribute('data-department-id');
-            const departmentName = container.getAttribute('data-department-name');
-            const courses = Array.from(container.querySelectorAll('.course-list li')).map(course => course.textContent);
-            openEditPopup(departmentID, departmentName, courses);
-        });
+    container.addEventListener('click', () => {
+        const courseID = container.getAttribute('data-course-id');
+        const departmentName = container.getAttribute('data-department-name');
+        const courses = Array.from(container.querySelectorAll('.course-list li')).map(course => course.textContent);
+        openEditPopup(courseID, departmentName, courses);
     });
+});
+
 
     // Close the main popup when clicking the close button
    

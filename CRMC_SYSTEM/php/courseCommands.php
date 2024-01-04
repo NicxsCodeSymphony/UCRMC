@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = new Connection();
     $pdo = $conn->openConnection();
 
-    $stmt = $pdo->prepare("DELETE FROM course WHERE courseID = ?");
+    $stmt = $pdo->prepare("DELETE FROM course WHERE courseName = ?");
     $stmt->execute([$departmentID]);
 
     $conn->closeConnection();
@@ -30,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute([$departmentID, $courseName]);
     }
 
+    // Check if the request is made using POST method
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the form is submitted for deleting a course
     if (isset($_POST['deleteCourse'])) {
         // Get the course ID from the POST data
@@ -39,6 +41,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare("DELETE FROM course WHERE courseID = ?");
         $stmt->execute([$courseID]);
     }
+
+    // ... (your existing code for adding a department, handling image upload, etc.)
+
+    // Redirect back to the main page or perform any other action
+    header("Location: course.php");
+    exit();
+}
+
 
     // ... (your existing code for adding a department, handling image upload, etc.)
 
@@ -79,3 +89,6 @@ function getDepartmentsAndCoursesFromDatabase($connection)
 $departmentsWithCourses = getDepartmentsAndCoursesFromDatabase($newconnection);
 $stmt = $pdo->query("SELECT departmentID, departmentName FROM department");
 $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$stmt = $pdo->query("SELECT * FROM course");
+$course = $stmt->fetchAll(PDO::FETCH_ASSOC);
