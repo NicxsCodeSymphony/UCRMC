@@ -10,14 +10,29 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 body{
     font-family: var(--header-font), sans-serif;
 }
 
+.container {
+    min-height: 90vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(../assets/school.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
 .header{
-    background: #efeae2;
+    background: rgba(255, 255, 255, 0.32);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgba(255, 255, 255, 1);
     height: 13vh;
     width: 100%;
     display: grid;
@@ -26,10 +41,24 @@ body{
 
 .logo{
     padding-left: 45px;
+    padding-top: 26px;
+    width: 50%;
 }
 
 .logo img{
     width: 80px;
+}
+
+span {
+    color: var(--third-color);
+}
+.logo p{
+    position: relative;
+    left: 12vh;
+    bottom: 6.5vh;
+    font-size: 3.5vh;
+    font-weight: bolder;
+    color: #fff;
 }
 
 .header > div{
@@ -39,23 +68,25 @@ body{
 }
 
 .navbar{
-    margin-left: 4vh;
+    margin-left: 25vh;
     width: 72%;
     height: 100%;
     display: flex;
     align-items: center;
+    
 }
 
 .right-head{
     display: flex;
     justify-content: center;
-    padding-left: 60px;
+    padding-left: 5vh; 
+    gap: 20px;
 }
 
 .right-head a{
-    background: var(--secondary-color);
+    background: var(--third-color);
     padding: 18px 35px;
-    border-radius: 30px;
+    border-radius: 18px;
     color: #fff;
     font-size: 15px;
 }
@@ -64,7 +95,7 @@ body{
 
 .hero{
     width: 92.5%;
-    height: 100vh;
+    height: 90vh;
     display: grid;
     grid-template-columns: 3fr 3fr;
     margin:0 var(--margins);
@@ -77,30 +108,38 @@ body{
     height: 100%;
 }
 
+.left-hero {
+    position: relative;
+    left: 100px;
+}
 
 .left-hero h5{
     font-weight: 100;
     font-size: 18px;
-    color: var(--secondary-color);
+    color: #fff;
 }
 
 .left-hero h1{
     font-family: var(--secondary-font);
-    font-size: 75px;
+    font-size: 60px;
     line-height: 1.2em;
     font-weight: 400;
     margin: 25px 0;
+    color: #fff;
 }
 
 .left-hero p{
     max-width: 500px;
-    color: #696969;
+    color: #fff;
     line-height: 1.2em;
 }
 
-.button-container{
+
+/* ****************************************** BUTTON *********************************  */
+
+.button-container a {
     margin-top: 60px;
-    width: 60%;
+    width: 70%;
     display: flex;
     justify-content: space-around;
 }
@@ -108,31 +147,13 @@ body{
 .button-container a{
     background: var(--secondary-color);
     padding: 18px 35px;
-    border-radius: 25px;
+    border-radius: 10px;
     color: #fff;
 }
 
 .button-container a:first-child{
     background-color: var(--third-color);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ul{
     display: flex;
@@ -147,6 +168,6 @@ li{
 }
 
 a{
-    color: #000;
+    color: #fff;
     text-decoration: none;
 }
