@@ -124,6 +124,31 @@ h1 {
     bottom: 95vh;
     left: 19%;
     border-radius: 15px;
+    
+}
+
+.user-profile img{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    margin-top: 23px;
+    margin-left: 25px;
+}
+
+.info {
+    position: relative;
+    bottom: 13vh;
+}
+
+.info h5 {
+    text-align: center;
+    font-size: 3.5vh;
+    margin-left: 5vh;
+}
+
+.info p {
+    margin-right: 10vh;
+    margin-top: 2vh;
 }
 
 /* <!-- ACADEMIC DETAILS --> */
@@ -137,6 +162,67 @@ h1 {
     border-radius: 15px;
 }
 
+.acad-details h3 {
+    margin-top: 10px;
+    margin-left: 70px;
+    font-size: 3.5vh;
+}
+.depa-info {
+    width: 70vh;
+    height: 5vh;
+    background: #f3a93a;
+    color: #fff;
+    border-radius: 15px;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.depa-info p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 5px 5px 0; 
+}
+.school-name {
+    margin-top: 6px;
+    width: 70vh;
+    height: 5vh;
+    background: #f3a93a;
+    color: #fff;
+    border-radius: 15px;
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.school-name p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 5px 5px 0; 
+    color: #fff;
+}
+
+.semester {
+    width: 20vh;
+    height: 5vh;
+    background: #b5c2ca;
+    color: #fff;
+    border-radius: 15px;
+    position: relative;
+    top: -5vh;
+    left: 75vh;
+}
+
+.semester p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 5px 5px 0; 
+    color: #fff;
+}
+
 /* <!-- TABLE CONTAINER --> */
 .table-container{
     background: var(--grid-color);
@@ -146,6 +232,12 @@ h1 {
     bottom: 113vh;
     left: 19%;
     border-radius: 15px;
+}
+
+.table-container h3 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 3.5vh;
 }
 
 /* <!-- ATTENDANCE --> */
@@ -159,6 +251,12 @@ h1 {
     border-radius: 15px;
 }
 
+.attendance h3 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 3.5vh;
+}
+
 /* <!-- EXAMINATION INFORMATION --> */
 .exam-info{
     background: var(--grid-color);
@@ -168,4 +266,10 @@ h1 {
     bottom: 171vh;
     left: 19%;
     border-radius: 15px;
+}
+
+.exam-info h3 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 3.5vh;
 }
