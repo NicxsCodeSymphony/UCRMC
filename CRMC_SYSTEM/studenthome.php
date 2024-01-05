@@ -44,27 +44,44 @@
 
     <!-- PROFILE -->
     <div class="account">
-
+        <div class="user-profile">
+            <img src="assets/nico.jpg" alt="">
+        </div>
+        <div class="info">
+            <h5>John Nico Edisan</h5>
+            <p>Student id: <br> 202019890</p>
+        </div>
     </div>
 
     <!-- ACADEMIC DETAILS -->
     <div class="acad-details">
-
+        <h3>Academic details</h3>
+        <div class="depa-info">
+            <p>Bachelor of Science in Information Technology (BSIT 2021-2026)</p>
+        </div>
+        <div class="school-name">
+            <p>University of CEBU ROOSEVELT MEMORIAL COLLEGES</p>
+        </div>
+        <div class="semester">
+            <p>1st semester</p>
+        </div>
     </div>
 
     <!-- TABLE CONTAINER -->
     <div class="table-container">
-
+        <div class="table">
+            <h3>Internal marks details</h3>
+        </div>
     </div>
 
     <!-- ATTENDANCE -->
     <div class="attendance">
-
+        <h3>Attendance (In %)</h3>
     </div>
 
     <!-- EXAMINATION INFORMATION -->
     <div class="exam-info">
-
+    <h3>Exam Information</h3>
     </div>
 </body>
 </html>
