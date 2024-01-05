@@ -347,10 +347,17 @@ form .input-field {
     text-decoration: none;
 }
 
+.form-box1 a {
+    color: #00bcd4;
+    text-decoration: none;
+}
 .form-box a:hover {
     text-decoration: underline;
 }
 
+.form-box1 a:hover {
+    text-decoration: underline;
+}
 form :where(.forgot-pass-link, .policy-text) {
     display: inline-flex;
     margin-top: 13px;
