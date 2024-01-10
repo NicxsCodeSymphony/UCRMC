@@ -7,14 +7,20 @@
     
   
     
-    function getUserData($email) {
-        $conn = new Connection();
+function getUserData($email) {
+    $conn = new Connection();
     $pdo = $conn->openConnection();
-    
-        $stmt = $pdo->prepare("SELECT * FROM student WHERE email = ?");
-        $stmt->execute([$email]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+
+    $stmt = $pdo->prepare("
+        SELECT s.*, c.courseName, d.departmentName
+        FROM student s
+        JOIN course c ON s.courseID = c.courseID
+        JOIN department d ON c.departmentID = d.departmentID
+        WHERE email = ?");
+    $stmt->execute([$email]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
     if (isset($_SESSION["username"])) {
         // Fetch user data from the database based on the email stored in the session
         $userData = getUserData($_SESSION["username"]);
@@ -30,7 +36,7 @@
         $pdo = $conn->openConnection();
     
         $stmt = $pdo->prepare("
-        SELECT s.*, g.prelim, g.midterm, g.semifinal, g.final, sub.subjectName, sub.subjectID, c.courseName
+        SELECT s.*, g.prelim, g.midterm, g.semifinal, g.final, g.total, g.gwa, g.remark, sub.subjectName, sub.subjectID, c.courseName
         FROM student s
         JOIN grade g ON s.studentID = g.studentID
         JOIN subject sub ON g.subjectID = sub.subjectID
@@ -127,6 +133,7 @@
             img{
                 width: 200px;
                 border-radius: 50%;
+                max-height: 150px;
             }
 
             .info-wrapper{
@@ -185,25 +192,102 @@
                 width: 100px;
             }
 
+            .Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(5, 65, 65);
+  position: relative;
+  top: 90%;
+  left: 10px;
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: white;
+}
+/* text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+
         </style>
     </head>
     <body>
 
         <div class="container">
             <div class="sidebar" style=" height: 150vh;">
-            <?php echo '<br /><br /><a href="logout.php">Logout</a>';   ?>
+           <button class="Btn">
+  
+  <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+  
+  <div class="text">Logout</div>
+</button>
+
+
+
                 <div class="logo">
-                    <img src="" alt="">
+                    <img src="assets/crmc-logo.png" alt="">
                     <h3>UCRMC</h3>
                 </div>
 
 
-                <!-- Account Section -->
                 <div class="account">
-                    <img src="assets/nico.jpg" alt="Profile Picture">
+                    <!-- <img src="assets/nico.jpg" alt="Profile Picture"> -->
                     <div class="account-info">
-                        <p>John Nico edisan</p>
-                        <p>nicxsician@gmail.com</p>
+                       <!--  <p>John Nico edisan</p>
+                        <p>nicxsician@gmail.com</p> -->
                     </div>
                 </div>
             </div>
@@ -227,14 +311,14 @@
                 </div>
             </div>
             <div class="status">
-                <h3>Teacher details</h3>
+                <h3>Student details</h3>
                 <!-- <h5><?php echo $_SESSION["user_data"]["courseID"]; ?></h5>
                 <h5><?php echo $_SESSION["user_data"]["subjectID"]; ?></h5> -->
 
-                <h5>College of Computer Studies</h5>
+                <h5 style=""><?php echo $_SESSION["user_data"]["courseName"]; ?></h5>
                 <div class="inline" style="display: flex; gap: 20px;">
-                <h5 style="width: 70%"><? echo $_SESSION["user_data"]["courseID"];</h5>
-                <h5 style="width: 30%">1 sem</h5>
+                <h5 style="width: 70%"><?php echo $_SESSION["user_data"]["departmentName"]; ?></h5>
+                <h5 style="width: 30%"><?php echo $_SESSION["user_data"]["age"]; ?> Years old</h5>
                 </div>
             </div>
         </div>
@@ -245,7 +329,7 @@
     <form method="post">
         <input type="hidden" name="studentID" value="<?php echo $_SESSION["user_data"]["studentID"]; ?>">
         <input type="hidden" name="courseID" value="<?php echo $_SESSION["user_data"]["courseID"]; ?>">
-        <button type="submit">Filter</button>
+        <button style="margin-left: 30px;" type="submit">VIEW GRADE</button>
     </form>
 </div>
 
@@ -258,8 +342,11 @@
                     <th>Email</th>
                     <th>Prelim</th>
                     <th>Midterm</th>
-                    <th>Semifinals</th>
+                    <th>Semi Finals</th>
                     <th>Finals</th>
+                    <th>Grade</th>
+                    <th>GWA</th>
+                    <th>Remarks</th>
                 </tr>
             </thead>
             <tbody>
@@ -271,12 +358,15 @@
                         <td><?php echo $student['midterm']; ?></td>
                         <td><?php echo $student['semifinal']; ?></td>
                         <td><?php echo $student['final']; ?></td>
+                        <td><?php echo $student['total']; ?></td>
+                        <td><?php echo $student['gwa']; ?></td>
+                        <td><?php echo $student['remark']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     <?php else : ?>
-        <p>No students found with the specified criteria.</p>
+        <p>No grades yet</p>
     <?php endif; ?>
 </div>
 
@@ -291,6 +381,16 @@
         </div>
 
         <script src="js/dashboard.js"></script>
+
+        <script>
+                
+            const logoutBtn = document.querySelector('.Btn');
+
+            logoutBtn.addEventListener('click', () => {
+                window.location.href = 'logout.php';
+            })
+
+        </script>
 
     </body>
     </html>

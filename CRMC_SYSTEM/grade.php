@@ -16,6 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['courseID'])) {
     $studentID = $_GET['studentID'];
     $courseID = $_GET['courseID'];
     $subjectID = $_GET['subjectID'];
+
+    // Check if grades already exist for the specified student and subject
+    $checkQuery = "SELECT * FROM grade WHERE studentID = ? AND subjectID = ?";
+    $checkStmt = $pdo->prepare($checkQuery);
+    $checkStmt->execute([$studentID, $subjectID]);
+
+    if ($checkStmt->rowCount() > 0) {
+        // Grades already exist, display an alert
+        echo "<script>alert('You have already added grades for this student and subject.');</script>";
+        echo "<script>
+            window.location.href = 'teacherhome.php'
+        </script>";
+        // You can redirect to another page or perform other actions as needed
+    }
 }
 
 if (isset($_GET['cta'])) {
@@ -23,12 +37,15 @@ if (isset($_GET['cta'])) {
     $midterm = $_GET['midterm'];
     $semi = $_GET['semi-finals'];
     $finals = $_GET['finals'];
+    $average = $_GET['average'];
+    $gwa = $_GET['gwa'];
+    $remark = $_GET['remark'];
 
-    $query = "INSERT INTO grade (studentID, courseID, subjectID, prelim, midterm, semifinal, final) VALUES (?, ?, ?,?,?,?,?)";
+    $query = "INSERT INTO grade (studentID, courseID, subjectID, prelim, midterm, semifinal, final, total, gwa, remark) VALUES (?, ?, ?,?,?,?,?,?,?,?)";
     try {
         // Prepare and execute the insertion query
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$studentID, $courseID, $subjectID, $prelim, $midterm, $semi, $finals]);
+        $stmt->execute([$studentID, $courseID, $subjectID, $prelim, $midterm, $semi, $finals, $average, $gwa, $remark]);
 
         // Check if the insertion was successful
         if ($stmt->rowCount() > 0) {
@@ -123,9 +140,129 @@ if (isset($_GET['cta'])) {
             <input type="hidden" name="studentID" value="<?php echo $studentID; ?>">
             <input type="hidden" name="subjectID" value="<?php echo $subjectID; ?>">
 
-            <input name="cta" type="submit" value="Submit Grades">
+            <input name="cta" onclick="updateAverageAndGWA();" type="submit" value="Submit Grades">
+
+
+
+            <input type="hidden" name="average" id="average" readonly>
+            <input type="hidden" name="gwa" id="gwa" readonly>
+            <input type="hidden" name="remark" id="remark" readonly>
         </form>
     </div>
+
+    <script>
+        
+        // Get references to the input fields
+        const prelimInput = document.getElementById('prelim');
+        const midtermInput = document.getElementById('midterm');
+        const semiFinalsInput = document.getElementById('semi-finals');
+        const finalsInput = document.getElementById('finals');
+        const averageInput = document.getElementById('average');
+        const gwaInput = document.getElementById('gwa');
+        const remarkInput = document.getElementById('remark');
+
+        // Event listener for input changes
+        [prelimInput, midtermInput, semiFinalsInput, finalsInput].forEach(input => {
+            input.addEventListener('input', updateAverageAndGWA);
+        });
+
+        // Function to update average and GWA
+        function updateAverageAndGWA() {
+            // Get the values from the input fields
+            const prelim = parseFloat(prelimInput.value) || 0;
+            const midterm = parseFloat(midtermInput.value) || 0;
+            const semiFinals = parseFloat(semiFinalsInput.value) || 0;
+            const finals = parseFloat(finalsInput.value) || 0;
+
+            // Calculate the average
+            const average = (prelim + midterm + semiFinals + finals) / 4;
+
+            // Update the average input field
+             averageInput.value = average.toFixed(2);
+
+            // Calculate GWA based on the average
+            const gwa = calculateGWA(average);
+            gwaInput.value = gwa;
+
+            // Update the remark input field
+            remarkInput.value = determineRemark(average);            
+        }
+
+        // Function to calculate GWA based on average
+        function calculateGWA(average) {
+    if (average >= 98) {
+        return 1.0;
+    } else if (average >= 97) {
+        return 1.1;
+    } else if (average >= 95) {
+        return 1.2;
+    } else if (average >= 93) {
+        return 1.3;
+    } else if (average >= 91) {
+        return 1.4;
+    } else if (average >= 89) {
+        return 1.5;
+    } else if (average >= 87) {
+        return 1.4;
+    } else if (average >= 85) {
+        return 1.5;
+    } else if (average >= 83) {
+        return 1.6;
+    } else if (average >= 81) {
+        return 1.7;
+    } else if (average >= 79) {
+        return 1.8;
+    } else if (average >= 77) {
+        return 1.9;
+    } else if (average >= 75) {
+        return 2.0;
+    } else if (average >= 73) {
+        return 2.1;
+    } else if (average >= 71) {
+        return 2.2;
+    } else if (average >= 69) {
+        return 2.3;
+    } else if (average >= 67) {
+        return 2.4;
+    } else if (average >= 65) {
+        return 2.5;
+    } else if (average >= 63) {
+        return 2.6;
+    } else if (average >= 61) {
+        return 2.7;
+    } else if (average >= 59) {
+        return 2.8;
+    } else if (average >= 57) {
+        return 2.9;
+    }  else if (average >= 55) {
+        return 3.0;
+    } else if (average >= 53) {
+        return 3.1;
+    } else if (average >= 51) {
+        return 3.2;
+    } else if (average >= 49) {
+        return 3.3;
+    }
+
+    // Add a default value if none of the conditions match
+    return 0.0; // You can adjust the default value as needed
+}
+
+function determineRemark(average) {
+            // Add conditions for determining the remark based on average
+            // You can customize this based on your grading scale
+            if (average >= 60) {
+                return 'PASSED';
+            }
+
+            // Add a default value if none of the conditions match
+            return 'FAILED';
+        }
+
+    </script>
+
+</body>
+</html>
 
 </body>
 </html>

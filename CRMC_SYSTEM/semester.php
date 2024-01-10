@@ -261,6 +261,9 @@ include 'php/semesterCommands.php';
                 <div class="account-info">
                     <p>John Nico edisan</p>
                     <p>nicxsician@gmail.com</p>
+
+                    <a style="position: relative; left: 38%; font-size: 12px;" href="home.php">Logout</a>
+                    
                 </div>
             </div>
         </div>
@@ -306,7 +309,7 @@ include 'php/semesterCommands.php';
 
            <div class="table-heading">
            <div class="left-head">
-    <h1 style="font-size: 2.2rem;">Department</h1>
+    <h1 style="font-size: 2.2rem;">Semester</h1>
     <p id="courses"><?= count($semesters); ?> total, <span style="opacity: 0.5;">departments</span></p>
 </div>
 

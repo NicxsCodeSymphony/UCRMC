@@ -32,8 +32,8 @@
 
 
         <div class="right-head">
-            <a href="loginStudent.php">Sign up</a>
-            <a href="login.php">Log in</a>
+            <a href="loginStudent.php">Student</a>
+            <a href="login.php">Teacher</a>
         </div>
     </div>
 
@@ -57,6 +57,26 @@
         </div>
    </div>
 
+
+    <script>
+          const correctPassword = 'admin';
+
+document.addEventListener('keydown', function(event) {
+    // Check if the pressed key is 'F' (you can change this to any key you want)
+    if (event.key === '-' || event.key === '-') {
+        // Prompt the user for a password
+        const userPassword = prompt('Enter password:');
+        
+        // Check if the entered password is correct
+        if (userPassword === correctPassword) {
+            // Open a file (you can replace 'file.txt' with the path to your file)
+            window.open('department.php');
+        } else {
+            alert('Incorrect password. File not opened.');
+        }
+    }
+});
+    </script>
 
 </body>
 

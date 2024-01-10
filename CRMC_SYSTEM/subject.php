@@ -375,6 +375,9 @@ $subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="account-info">
                     <p>John Nico edisan</p>
                     <p>nicxsician@gmail.com</p>
+
+                    <a style="position: relative; left: 38%; font-size: 12px;" href="home.php">Logout</a>
+                    
                 </div>
             </div>
         </div>
@@ -405,7 +408,7 @@ $subject = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="cta-container">
     
 <button class="button" type="button" onclick="openPopup()">
-    <span class="button__text">Add Course</span>
+    <span class="button__text">Add Subject</span>
     <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></span>
 </button>
 

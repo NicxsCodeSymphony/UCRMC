@@ -116,6 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="account-info">
                     <p>John Nico edisan</p>
                     <p>nicxsician@gmail.com</p>
+
+                    <a style="position: relative; left: 38%; font-size: 12px;" href="home.php">Logout</a>
+                    
                 </div>
             </div>
         </div>
@@ -225,8 +228,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </td>
 
                     <td>
-                    <a href="assign.php?teacherID=<?= $teacherInfo['teacherID']; ?>&courseID=0">Update</a>
-                        <button name="deleteTeacherForm" onclick="deleteDepartment(<?= $teacherInfo['departmentID']; ?>)">Delete</button>
+                    <a href="assign.php?teacherID=<?= $teacherInfo['teacherID']; ?>&courseID=0">Assign</a>
+                      
                     </td>
                 </tr>
             <?php endforeach; ?>

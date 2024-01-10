@@ -108,10 +108,7 @@ $course = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="navbar">
                 <ul>
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="#">About School</a></li>
-                    <li><a href="#">Classes</a></li>
-                    <li><a href="#">Programs</a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -129,8 +126,8 @@ $course = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
     <div class="hero">
         <h1>Online <br> Application</h1>
         
-        <button id="teacher">Teacher</button>
-        <button id="student">Student</button>
+       <!--  <button id="teacher">Teacher</button>
+        <button id="student">Student</button> -->
         </div>
     </div>
 
@@ -172,15 +169,15 @@ $course = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
         </div>
             <div class="inputs">   <label for="">Year Level*</label> <br>
                 <select id="schoolYear" name="yearLevel">
-                <?php foreach ($semester as $semesters): ?>
+                <!-- <?php foreach ($semester as $semesters): ?>
                 <option value="<?= $semesters['yearLevel']; ?>"><?= $semesters['yearLevel']; ?></option>
-        <?php endforeach; ?>
+        <?php endforeach; ?> -->
 
-                    <!-- <option value="#"></option>
+                    <option value="#"></option>
                     <option value="1">First Year</option>
                     <option value="2">Second Year</option>
                     <option value="3">Third Year</option>
-                    <option value="4">Fourth Year</option> -->
+                    <option value="4">Fourth Year</option>
                 </select>
             </div>
         </div>

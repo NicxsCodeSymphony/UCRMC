@@ -265,6 +265,9 @@ include 'php/courseCommands.php';
                 <div class="account-info">
                     <p>John Nico edisan</p>
                     <p>nicxsician@gmail.com</p>
+
+                    <a style="position: relative; left: 38%; font-size: 12px;" href="home.php">Logout</a>
+                    
                 </div>
             </div>
         </div>
