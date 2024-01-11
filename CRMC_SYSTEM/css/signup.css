@@ -1,0 +1,139 @@
+:root{
+    --header-font: 'Inter';
+    --secondary-font: 'Marko One';
+    --secondary-color: #268270;
+    --third-color: #f3a93a;
+    --margins: 50px;
+    --form-background: #dfe6c4;
+    --linen: #E9DCC9;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: var(--header-font), sans-serif;
+    background: #b5c2ca;
+    overflow: auto;
+}
+
+.header{
+    background: var(--form-background);
+    height: 13vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    gap: 10px;
+}
+
+.logo img{
+    width: 80px;
+}
+
+.logo h3 {
+    font-size: 4vh;
+}
+
+.header > div{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.left-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ****************************************** START OF HERO *********************************  */
+
+.section1{
+    width: 100%;
+    height: 170vh;
+}
+
+.first-sec{
+    height: 70vh;
+    text-align: center;
+    padding-top: 5vh;
+}
+
+.first-sec h4{
+    font-weight: 400;
+    color: var(--secondary-color);
+    letter-spacing: .04em;
+    margin-bottom: 10px;
+}
+
+.first-sec h2{
+    margin: 10px 0;
+    font-family: var(--secondary-font);
+    font-size: 56px;
+    line-height: 1.2em;
+    color: #314d4a;
+}
+
+.first-sec p{
+    max-width: 650px;
+    margin: 50px auto;
+    opacity: 0.6;
+}
+
+
+form{
+    height: 150vh;
+    background: var(--form-background);
+    margin: 0 auto;
+    width: 74%;
+    border-radius: 10px;
+    padding: 40px;
+    position: relative;
+    bottom: -2vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+}
+
+.field-form-wrapper{
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    grid-column-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.inputs label{
+    font-family: var(--secondary-font);
+    font-weight: bold;
+    display: block;
+    opacity: 0.8;
+}
+
+.inputs input, select{
+    width: 100%;
+    height: 38px;
+    color: #333;
+    border: 2px solid var(--linen);
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 0 20px;
+    min-height: 45px;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+input[type="submit"]{
+    width: 15%;
+    height: 60px;
+    background: var(--secondary-color);
+    color: #fff;
+    font-weight: bold;
+}
