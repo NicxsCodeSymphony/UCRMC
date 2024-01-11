@@ -72,16 +72,44 @@ function getUserData($email) {
         <style>
 
             *{
-                overflow: auto;
+                overflow: hidden;
             }
 
             .container{
                 background-color: #d0ee82;
             }
 
-            .sidebar{
-                background: #161f00;
-                color: #fff;
+            .navbar{
+                background: #fff;
+                color: black;
+                height: 10vh;
+                border-radius: 10px;
+            }
+
+            .logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-bottom: 58px;
+                gap: 10px;
+            }
+
+            .logo img {
+                width: 83px;
+                height: 60px;
+            }
+
+            .logo h3 {
+                font-size: 4vh;
+            }
+
+            .table-container{
+                overflow: auto;
+                height: 82vh;
+                width: 96.5%;
+                position: relative;
+                bottom: 85vh;
+                left: 4vh;
             }
 
             .heading{
@@ -131,9 +159,9 @@ function getUserData($email) {
             }
 
             img{
-                width: 200px;
+                width: 150px;
                 border-radius: 50%;
-                max-height: 150px;
+                max-height: 140px;
             }
 
             .info-wrapper{
@@ -192,7 +220,7 @@ function getUserData($email) {
                 width: 100px;
             }
 
-            .Btn {
+.Btn {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -207,8 +235,8 @@ function getUserData($email) {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: rgb(5, 65, 65);
   position: relative;
-  top: 90%;
-  left: 10px;
+  bottom: 8.8%;
+  left: 90%;
 }
 
 /* plus sign */
@@ -238,6 +266,7 @@ function getUserData($email) {
   font-weight: 600;
   transition-duration: .3s;
 }
+
 /* hover effect on button width */
 .Btn:hover {
   width: 125px;
@@ -267,21 +296,21 @@ function getUserData($email) {
     <body>
 
         <div class="container">
-            <div class="sidebar" style=" height: 150vh;">
-           <button class="Btn">
+
+        <div class="navbar">
+            <div class="logo">
+                        <img src="assets/crmc-logo.png" alt="">
+                        <h3>University of CRMC</h3>
+            </div>
+
+        </div>
+        
+        <button class="Btn">
   
   <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
   
   <div class="text">Logout</div>
 </button>
-
-
-
-                <div class="logo">
-                    <img src="assets/crmc-logo.png" alt="">
-                    <h3>UCRMC</h3>
-                </div>
-
 
                 <div class="account">
                     <!-- <img src="assets/nico.jpg" alt="Profile Picture"> -->
@@ -294,7 +323,7 @@ function getUserData($email) {
 
 
 
-            <div class="table-container" style="position: relative; bottom: 160%; height: 150vh;">
+            <div class="table-container" style="">
 
         <div class="heading">
             <h1>Dashboard</h1>
