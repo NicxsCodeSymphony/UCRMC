@@ -81,3 +81,19 @@ function updateCurrentDate() {
 
 // Call the function on load
 updateCurrentDate();
+
+
+function animateCount(element, targetValue, duration) {
+    let currentValue = 0;
+    const increment = Math.ceil(targetValue / (duration / 20)); // 20 milliseconds per frame
+
+    const intervalId = setInterval(() => {
+        currentValue += increment;
+        element.textContent = currentValue;
+
+        if (currentValue >= targetValue) {
+            clearInterval(intervalId);
+            element.textContent = targetValue;
+        }
+    }, 20);
+}

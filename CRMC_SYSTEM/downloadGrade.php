@@ -63,7 +63,7 @@ $grades = $stmt->fetchAll(PDO::FETCH_ASSOC);
             /*border: 1px #000 solid;*/
             margin:  0 12%;
             padding: 15px 0;
-            width: 65vw;
+            width: 58vw;
         }
 
 
@@ -73,7 +73,7 @@ $grades = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         table {
-            width: 87%;
+            width: 80%;
             margin: 20px 30px;
             border-collapse: collapse;
             border: 1px solid #333;
@@ -97,6 +97,8 @@ $grades = $stmt->fetchAll(PDO::FETCH_ASSOC);
         p {
             text-align: center;
             color: #333;
+            position: relative;
+            right: 80px;
         }
 
         .download-button {

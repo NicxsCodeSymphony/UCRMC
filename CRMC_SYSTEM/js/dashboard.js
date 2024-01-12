@@ -5,7 +5,6 @@ btn.onclick = function () {
     sidebar.classList.toggle('active');
 };
 
-// Update current time
 function updateCurrentTime() {
     const currentDate = new Date();
     const options = { weekday: 'long', day: 'numeric', month: 'long' };
@@ -13,5 +12,4 @@ function updateCurrentTime() {
     document.getElementById('current-time').textContent = formattedDate;
 }
 
-// Call the function on load
 updateCurrentTime();

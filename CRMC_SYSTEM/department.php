@@ -2,6 +2,11 @@
 session_start();
 include 'connection.php';
 include 'php/departmentCommands.php';
+include 'php/teacherStudentCounts.php';
+
+
+
+$currentDate = date('l, F j, Y');
 ?>
 
 
@@ -66,11 +71,12 @@ include 'php/departmentCommands.php';
 </div>
 
 <div class="time-container">
-                <span id="current-time" class="date-text">Friday, January 11 ,2024</span>
-                <div class="calendar-dropdown" id="calendar-dropdown">
-                    <!-- Calendar content goes here (you may use a library or custom implementation) -->
-                </div>
-                   </div>
+        <!-- Display the current date -->
+        <span id="current-time" class="date-text"><?= $currentDate; ?></span>
+        <div class="calendar-dropdown" id="calendar-dropdown">
+            <!-- Calendar content goes here (you may use a library or custom implementation) -->
+        </div>
+    </div>
 
 
 <div class="cta-container">
@@ -100,12 +106,12 @@ include 'php/departmentCommands.php';
 
             <div class="right-head">
                 <div class="right-header-content">
-                    <h1 id="teachers">94</h1>
+                    <h1 id="teachers"><?= $totalTeachers; ?></h1>
                     <p style="margin-top: 10px;font-size: 14px;">Teachers</p>
                 </div>
 
                 <div class="right-header-content">
-                    <h1 id="students">94</h1>
+                    <h1 id="students"><?= $totalStudents ?></h1>
                     <p style="margin-top: 10px;font-size: 14px;">Students</p>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 include 'connection.php';
+include 'php/teacherStudentCounts.php';
 
 // Fetch departments from the database
 $conn = new Connection();
@@ -63,6 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn->closeConnection();
 }
+
+$currentDate = date('l, F j, Y');
 
 
 ?>
@@ -139,19 +142,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <div class="time-container">
-<span id="current-time" class="date-text">Friday, January 11 ,2024</span>
-                <div class="calendar-dropdown" id="calendar-dropdown">
-                    <!-- Calendar content goes here (you may use a library or custom implementation) -->
-                </div>
-                   </div>
+        <!-- Display the current date -->
+        <span id="current-time" class="date-text"><?= $currentDate; ?></span>
+        <div class="calendar-dropdown" id="calendar-dropdown">
+            <!-- Calendar content goes here (you may use a library or custom implementation) -->
+        </div>
+    </div>
 
 
 <div class="cta-container">
     
-<button class="button" type="button" onclick="openPopup()">
-    <span class="button__text">Add Dept</span>
-    <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></span>
-</button>
+
 
 
 
@@ -171,14 +172,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-            <div class="right-head">
+<div class="right-head">
                 <div class="right-header-content">
-                    <h1 id="teachers">94</h1>
+                    <h1 id="teachers"><?= $totalTeachers; ?></h1>
                     <p style="margin-top: 10px;font-size: 14px;">Teachers</p>
                 </div>
 
                 <div class="right-header-content">
-                    <h1 id="students">94</h1>
+                    <h1 id="students"><?= $totalStudents ?></h1>
                     <p style="margin-top: 10px;font-size: 14px;">Students</p>
                 </div>
             </div>

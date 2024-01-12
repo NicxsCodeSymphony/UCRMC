@@ -655,8 +655,9 @@ if (isset($students) && !empty($students)) {
                     console.error("Table not found.");
                 }
             });
-
-            function download() {
+        });
+        
+        function download() {
                 var subjectID = <?php echo $_SESSION["user_data"]["subjectID"]; ?>;
                 var teacherName = "<?php echo $_SESSION["user_data"]["firstName"] . ' ' . $_SESSION["user_data"]["lastName"]; ?>";
                 var subjectName = "<?php echo $subjectName; ?>";
@@ -669,7 +670,6 @@ if (isset($students) && !empty($students)) {
                     console.error("Invalid subjectID");
                 }
             }
-        });
 </script>
 
 

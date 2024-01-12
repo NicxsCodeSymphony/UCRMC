@@ -1,7 +1,5 @@
 <?php
 
-include 'connection.php';
-
 $conn = new Connection();
 $pdo = $conn->openConnection();
 
