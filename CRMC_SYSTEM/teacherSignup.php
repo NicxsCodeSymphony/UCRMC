@@ -97,46 +97,24 @@ $course = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     
-    <div class="header">
+<div class="header">
         <div class="left-head">
             <div class="logo">
                 <img src="assets/crmc-logo.png" alt="">
+                <h3>University of CRMC</h3>
             </div>
 
-            <div class="navbar">
-                <ul>
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="#">About School</a></li>
-                    <li><a href="#">Classes</a></li>
-                    <li><a href="#">Programs</a></li>
-                </ul>
-            </div>
         </div>
 
-
-        <div class="right-head">
-            <a href="#">Start Learning</a>
-        </div>
     </div>
 
     <!-- END OF HEADER -->
 
     <!-- Start of Hero -->
 
-    <div class="hero">
-        <h1>Online <br> Application</h1>
-
-        </div>
-    </div>
-
-
     <div class="section1">
         <div class="first-sec">
-            <h4>SIGN UP FOR OUR INSTITUTION</h4>
-            <h2>Welcome you to  our <br> best school</h2>
-            <p>To apply for one of our programs, simply fill out the online application form below. 
-                We require some basic information such as your name, contact details, and background.</p>
-        </div>
+            <h2>FILL OUT THE FORM IN ADDING TEACHERS</h2>
 
         <form method="POST" action="teacherSignup.php" enctype="multipart/form-data">
         
@@ -201,8 +179,8 @@ $course = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
         </div>
         
 
-        <div class="field-form-wrapper" style="display: block;">
-            <div class="inputs" style="width: 100%; display:flex; justify-content: center;"> 
+        <div class="field-form-wrapper" style="display: inline;">
+            <div class="inputs" style="width: 200%; display:flex; justify-content: center;"> 
                 <input type="submit" name="cta" value="Submit">
             </div>
         </div>
@@ -210,7 +188,7 @@ $course = $stmtCourse->fetchAll(PDO::FETCH_ASSOC);
         
 
     </form>
-        
+    </div>        
     </div>
 
 <script>
